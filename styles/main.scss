@@ -7,7 +7,6 @@
    transition:all 0.4s ease-out;
    font-family:'cairo', sans-serif;
    scroll-behavior:smooth;
-   list-style:none;
    text-decoration:none !important;}
  
 :root {--violet:#ebddf1;
@@ -70,6 +69,7 @@
        --green1:#dbf7e3;
        --green2:#bdf5ce;
        --green3:#7ef8a3;
+       --green4:#66f892;
        --green5:#27fc67;
        --green6:#07fc50;
        --green7:#03ce40;
@@ -221,18 +221,18 @@
        --text-shadow4:0 0 4px rgb(6, 150, 42);}
  
  /*** Global Rules ***/
- ::-webkit-scrollbar {width:8px;}
+::-webkit-scrollbar {width:8px;}
  
- ::-webkit-scrollbar-thumb {background-image:linear-gradient(125deg, var(--light-blue5) 0%, var(--primary-color15) 100%);
-                            border-radius:10px;}
+::-webkit-scrollbar-thumb {background-image:linear-gradient(125deg, var(--light-blue5) 0%, var(--primary-color15) 100%);
+                           border-radius:10px;}
  
- *::selection {background:var(--light-orange7);
-               color:#fff;}
+*::selection {background:var(--light-orange7);
+              color:#fff;}
  
- html {font-size:83%}
+html {font-size:83%}
  
- body {overflow-x:hidden;
-       background-color:var(--light-orange);}
+body {overflow-x:hidden;
+      background-color:var(--light-orange);}
  
 .d-flex-r-st-st {display:flex;
                  flex-direction:row;
@@ -354,29 +354,47 @@
                   justify-content:flex-end;
                   align-items:flex-end}
 
+.btn {display:inline-block;
+      text-transform:uppercase;
+      font-size:1rem;
+      font-weight:bold;
+      padding:0.6rem 1.4rem;
+      outline:0;
+      color:var(--white);
+      background-color:var(--black);
+      border:1px solid var(--black);
+      border-radius:0;
+      transition:all 0.6s linear;}
+
+.btn:hover {color:var(--black);
+            background-color:transparent;}
+
 section {padding:2rem 7%;}
 
 
 /**************
   # Slider
 **************/
-.slider-section {position:relative;
+.slider-section {min-height:90vh;
+                 position:relative;
 
-    .slider-container {margin:1rem auto;
-                       width:80%;
-                       height:20rem;
+    .slider-container {width:80%;
+                       margin:1rem auto;                     
                        position:relative;
 
-        .product-card {display:grid;
+        .product-card {display:none;
                        grid-template-columns:1fr 1fr;
                        gap:2rem;
                        padding:8rem 3rem 3rem;
                        border-radius:0.6rem;
-                       box-shadow:var(--box-shadow2);display:none;
+                       box-shadow:var(--box-shadow2);
+                      
 
             .col-left {
                 .image {width:80%;
-                    img {width:80%;}
+                    img {width:20rem;
+                         height:20rem;
+                         object-fit:contain;}
                 }
             }
 
@@ -423,43 +441,24 @@ section {padding:2rem 7%;}
         .product-card.active {display:grid;}
     }
 
-    .slider-controls {width:95%;
-                      margin:auto;
-
-        .prev,
-        .next {font-size:1.1rem;
-               text-align:center;
-               width:7rem;
-               cursor:pointer;
-               border-radius:0.2rem;
-               padding:0.2rem;
-               user-select:none;
-               color:#fff;
-               background-color:#009688;}
-
-        .prev {float:left;}
-
-        .next {float:right;}
-
-    }
-
-    .arrows {width:95%;
+    .arrows {width:89%;
+             margin:auto;
              position:absolute;
-             top:46%;
+             top:50%;
              transform:translateY(-50%);
-             left:50%;
-             transform:translateX(-50%);
              display:flex !important;
              flex-direction:row;
              justify-content:space-between;
              align-items:center;
 
         .arrow-left,
-        .arrow-right {width:2rem;
-                      height:2rem;
+        .arrow-right {width:2.5rem;
+                      height:2.5rem;
                       padding:0;
                       font-size:1.2rem;
-                      line-height:2rem;
+                      display:flex;
+                      justify-content:center;
+                      align-items:center;
                       text-align:center;
                       padding:0;
                       border-radius:50%;
@@ -468,39 +467,54 @@ section {padding:2rem 7%;}
                       cursor:pointer;}
         
         .arrow-left.disabled,
-        .arrow-right.disabled {background-color:rgba(0, 150, 136, 0.5);
+        .arrow-right.disabled {background-color:var(--gray4);
                                cursor:no-drop;}
     }
 
-    .indicators {width:60%;
-                 float:left;
+    .indicators {width:fit-content;
+                 margin:2rem auto 0;
+                 padding:0.1rem;
 
             ul {margin:0;
+                width:fit-content;
+                display:flex;
+                flex-direction:row;
+                justify-content:center;
+                align-items:center;
                 text-align:center;
+                padding:0 !important;
+                gap:0.8rem;
+
 
                 li {display:inline-block;
-                    background-color:#f6f6f6;
-                    color:#333;
                     font-weight:bold;
                     width:2rem;
                     height:2rem;
                     border-radius:0.1rem;
-                    margin:0 2px;
                     line-height:1.9;
-                    cursor:pointer;}
+                    cursor:pointer;
+                    color:var(--green3);
+                    background-color:var(--green15);}
 
-                li.active {color:var(--green5);
-                           background-color:var(--green15);}
+                li.active {color:var(--green3);
+                           background-color:var(--green10);}
             }
     }
 
-    .slide-number {position:absolute;
-                   right:5%;
-                   bottom:-6.5rem;
-                   padding:0.2rem 0.5rem;
-                   color:var(--white);
-                   background-color:rgba(0,0,0,0.6);
-                   border-radius:0.2rem;
-                   z-index:2;}
+    .slider-number-block {width:80%;
+                          margin:auto;
 
+        .slide-number {padding:0.2rem 0.5rem;
+                       color:var(--white);
+                       background-color:rgba(0,0,0,0.6);
+                       border-radius:0.2rem;
+                       z-index:2;}
+
+    }
+
+}
+
+@media(max-width:768px){
+    .slider-section .slider-container {width:95%;}
+    .slider-section .slider-container .product-card {grid-template-columns:1fr;}
 }

@@ -3,7 +3,7 @@ let slidesCount = sliders.length;
 let currentSlide = 1;
 let prevBtn = document.querySelector('.slider-section .arrows .arrow-left');
 let nextBtn = document.querySelector('.slider-section .arrows .arrow-right');
-let slideNumberElement = document.getElementById('slide-number');
+let slideNumber = document.querySelector('.slider-section .slide-number');
 
 prevBtn.onclick = prevSlide;
 nextBtn.onclick = nextSlide;
@@ -42,7 +42,7 @@ function removeAllActive(){
 
 function theChecker(){
 
-    slideNumberElement.textContent = 'Slide' + (currentSlide) + ' of ' + (slidesCount);
+    slideNumber.textContent = 'Slide ' + (currentSlide) + ' of ' + (slidesCount);
 
     removeAllActive();
  

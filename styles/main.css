@@ -8,7 +8,6 @@
   transition: all 0.4s ease-out;
   font-family: "cairo", sans-serif;
   scroll-behavior: smooth;
-  list-style: none;
   text-decoration: none !important;
 }
 
@@ -65,6 +64,7 @@
   --green1:#dbf7e3;
   --green2:#bdf5ce;
   --green3:#7ef8a3;
+  --green4:#66f892;
   --green5:#27fc67;
   --green6:#07fc50;
   --green7:#03ce40;
@@ -389,6 +389,25 @@ body {
   align-items: flex-end;
 }
 
+.btn {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.6rem 1.4rem;
+  outline: 0;
+  color: var(--white);
+  background-color: var(--black);
+  border: 1px solid var(--black);
+  border-radius: 0;
+  transition: all 0.6s linear;
+}
+
+.btn:hover {
+  color: var(--black);
+  background-color: transparent;
+}
+
 section {
   padding: 2rem 7%;
 }
@@ -397,28 +416,29 @@ section {
   # Slider
 **************/
 .slider-section {
+  min-height: 90vh;
   position: relative;
 }
 .slider-section .slider-container {
-  margin: 1rem auto;
   width: 80%;
-  height: 20rem;
+  margin: 1rem auto;
   position: relative;
 }
 .slider-section .slider-container .product-card {
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   padding: 8rem 3rem 3rem;
   border-radius: 0.6rem;
   box-shadow: var(--box-shadow2);
-  display: none;
 }
 .slider-section .slider-container .product-card .col-left .image {
   width: 80%;
 }
 .slider-section .slider-container .product-card .col-left .image img {
-  width: 80%;
+  width: 20rem;
+  height: 20rem;
+  object-fit: contain;
 }
 .slider-section .slider-container .product-card .content span {
   color: var(--orange-red1);
@@ -466,35 +486,12 @@ section {
 .slider-section .slider-container .product-card.active {
   display: grid;
 }
-.slider-section .slider-controls {
-  width: 95%;
-  margin: auto;
-}
-.slider-section .slider-controls .prev,
-.slider-section .slider-controls .next {
-  font-size: 1.1rem;
-  text-align: center;
-  width: 7rem;
-  cursor: pointer;
-  border-radius: 0.2rem;
-  padding: 0.2rem;
-  user-select: none;
-  color: #fff;
-  background-color: #009688;
-}
-.slider-section .slider-controls .prev {
-  float: left;
-}
-.slider-section .slider-controls .next {
-  float: right;
-}
 .slider-section .arrows {
-  width: 95%;
+  width: 89%;
+  margin: auto;
   position: absolute;
-  top: 46%;
+  top: 50%;
   transform: translateY(-50%);
-  left: 50%;
-  transform: translateX(-50%);
   display: flex !important;
   flex-direction: row;
   justify-content: space-between;
@@ -502,11 +499,13 @@ section {
 }
 .slider-section .arrows .arrow-left,
 .slider-section .arrows .arrow-right {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0;
   font-size: 1.2rem;
-  line-height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   padding: 0;
   border-radius: 50%;
@@ -516,42 +515,59 @@ section {
 }
 .slider-section .arrows .arrow-left.disabled,
 .slider-section .arrows .arrow-right.disabled {
-  background-color: rgba(0, 150, 136, 0.5);
+  background-color: var(--gray4);
   cursor: no-drop;
 }
 .slider-section .indicators {
-  width: 60%;
-  float: left;
+  width: fit-content;
+  margin: 2rem auto 0;
+  padding: 0.1rem;
 }
 .slider-section .indicators ul {
   margin: 0;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  padding: 0 !important;
+  gap: 0.8rem;
 }
 .slider-section .indicators ul li {
   display: inline-block;
-  background-color: #f6f6f6;
-  color: #333;
   font-weight: bold;
   width: 2rem;
   height: 2rem;
   border-radius: 0.1rem;
-  margin: 0 2px;
   line-height: 1.9;
   cursor: pointer;
-}
-.slider-section .indicators ul li.active {
-  color: var(--green5);
+  color: var(--green3);
   background-color: var(--green15);
 }
-.slider-section .slide-number {
-  position: absolute;
-  right: 5%;
-  bottom: -6.5rem;
+.slider-section .indicators ul li.active {
+  color: var(--green3);
+  background-color: var(--green10);
+}
+.slider-section .slider-number-block {
+  width: 80%;
+  margin: auto;
+}
+.slider-section .slider-number-block .slide-number {
   padding: 0.2rem 0.5rem;
   color: var(--white);
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 0.2rem;
   z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .slider-section .slider-container {
+    width: 95%;
+  }
+  .slider-section .slider-container .product-card {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
