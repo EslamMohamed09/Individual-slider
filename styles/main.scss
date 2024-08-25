@@ -69,7 +69,7 @@
        --green1:#dbf7e3;
        --green2:#bdf5ce;
        --green3:#7ef8a3;
-       --green4:#66f892;
+       --green4:#6cf896;
        --green5:#27fc67;
        --green6:#07fc50;
        --green7:#03ce40;
@@ -493,10 +493,10 @@ section {padding:2rem 7%;}
                     border-radius:0.1rem;
                     line-height:1.9;
                     cursor:pointer;
-                    color:var(--green3);
+                    color:var(--green2);
                     background-color:var(--green15);}
 
-                li.active {color:var(--green3);
+                li.active {color:var(--green2);
                            background-color:var(--green10);}
             }
     }

@@ -1,32 +1,25 @@
 let sliders = Array.from(document.querySelectorAll('.slider-container .product-card'));
-let slidesCount = sliders.length;
 let currentSlide = 1;
 let prevBtn = document.querySelector('.slider-section .arrows .arrow-left');
 let nextBtn = document.querySelector('.slider-section .arrows .arrow-right');
 let slideNumber = document.querySelector('.slider-section .slide-number');
 
-prevBtn.onclick = prevSlide;
-nextBtn.onclick = nextSlide;
+let paginationIndicators = document.createElement('ul');
 
-let paginationElement = document.createElement('ul');
+paginationIndicators.setAttribute('class', 'pagination-indicators');
 
-paginationElement.setAttribute('id', 'pagination-ul');
-
-for (let i=1; i<=slidesCount; i++){
+for (let i=1; i<=sliders.length; i++){
     
-    let paginationItem = document.createElement('li');
+    let paginationIndicator = document.createElement('li');
     
-        paginationItem.setAttribute('data-index', i);
-        paginationItem.appendChild(document.createTextNode(i));
-        paginationElement.appendChild(paginationItem);
+        paginationIndicator.setAttribute('data-index', i);
+        paginationIndicator.appendChild(document.createTextNode(i));
+        paginationIndicators.appendChild(paginationIndicator);
 }
 
-document.querySelector('.slider-section .indicators').appendChild(paginationElement);
+document.querySelector('.slider-section .indicators').appendChild(paginationIndicators);
 
-let paginationCreatedUl = document.getElementById('pagination-ul');
-
-let paginationsBullets = Array.from(document.querySelectorAll('#pagination-ul li'));
-
+let paginationDots = Array.from(document.querySelectorAll('.pagination-indicators li'));
 
 function removeAllActive(){
 
@@ -34,37 +27,11 @@ function removeAllActive(){
         slider.classList.remove('active');
     });
 
-    paginationsBullets.forEach(function(bullet){
+    paginationDots.forEach(function(bullet){
         bullet.classList.remove('active');
     });    
 
 }
-
-function theChecker(){
-
-    slideNumber.textContent = 'Slide ' + (currentSlide) + ' of ' + (slidesCount);
-
-    removeAllActive();
- 
-    sliders[currentSlide - 1].classList.add('active');
-
-    paginationCreatedUl.children[currentSlide -1].classList.add('active');
-
-    if(currentSlide == 1){
-       prevBtn.classList.add('disabled');
-    } else {
-        prevBtn.classList.remove('disabled');
-    }
-
-    if(currentSlide == slidesCount){
-       nextBtn.classList.add('disabled');
-    } else {
-       nextBtn.classList.remove('disabled');
-    }
-
-}
-
-theChecker();
 
 function prevSlide(){
     if(prevBtn.classList.contains('disabled')){
@@ -90,8 +57,37 @@ function nextSlide(){
     
 }
 
-for (let i=0; i < paginationsBullets.length; i++) { // Dots Loop
-     paginationsBullets[i].onclick = function () {
+prevBtn.onclick = prevSlide;
+nextBtn.onclick = nextSlide;
+
+function theChecker(){
+
+    slideNumber.textContent = 'Slide ' + (currentSlide) + ' of ' + (sliders.length);
+
+    removeAllActive();
+ 
+    sliders[currentSlide - 1].classList.add('active');
+
+    paginationIndicators.children[currentSlide -1].classList.add('active');
+
+    if(currentSlide == 1){
+       prevBtn.classList.add('disabled');
+    } else {
+        prevBtn.classList.remove('disabled');
+    }
+
+    if(currentSlide == sliders.length){
+       nextBtn.classList.add('disabled');
+    } else {
+       nextBtn.classList.remove('disabled');
+    }
+
+}
+
+theChecker();
+
+for (let i=0; i < paginationDots.length; i++) { // Get Slide By It's Dot
+     paginationDots[i].onclick = function () {
         currentSlide = parseInt(this.getAttribute('data-index'));
         theChecker();
      }
