@@ -1,79 +1,65 @@
-let sliders = Array.from(document.querySelectorAll('.slider-container .product-card'));
+let sliders = document.querySelectorAll(".slider-section .slider-container .product-card");
 let currentSlide = 1;
-let prevBtn = document.querySelector('.slider-section .arrows .arrow-left');
-let nextBtn = document.querySelector('.slider-section .arrows .arrow-right');
-let slideNumber = document.querySelector('.slider-section .slide-number');
+let prevBtn = document.querySelector(".slider-section .arrows .arrow-left");
+let nextBtn = document.querySelector(".slider-section .arrows .arrow-right");
+let slideNumber = document.querySelector(".slider-number-block .slide-number");
 
 let paginationIndicators = document.createElement('ul');
-
 paginationIndicators.setAttribute('class', 'pagination-indicators');
 
 for (let i=1; i<=sliders.length; i++){
-    
+
     let paginationIndicator = document.createElement('li');
-    
         paginationIndicator.setAttribute('data-index', i);
-        paginationIndicator.appendChild(document.createTextNode(i));
         paginationIndicators.appendChild(paginationIndicator);
 }
 
 document.querySelector('.slider-section .indicators').appendChild(paginationIndicators);
 
-let paginationDots = Array.from(document.querySelectorAll('.pagination-indicators li'));
-
-function removeAllActive(){
-
-    sliders.forEach(function(slider){
-        slider.classList.remove('active');
-    });
-
-    paginationDots.forEach(function(bullet){
-        bullet.classList.remove('active');
-    });    
-
-}
+let paginationDots = document.querySelectorAll('.slider-section .pagination-indicators li');
 
 function prevSlide(){
-    if(prevBtn.classList.contains('disabled')){
+  if(prevBtn.classList.contains('disabled')){
 
-        return false;
-        
-     } else {
-       currentSlide--;
-       theChecker();
-     }
+     return false;
+
+  } else {
+    currentSlide--;
+    slidersChecker();
+  }
 }
 
 function nextSlide(){
-
   if(nextBtn.classList.contains('disabled')){
 
      return false;
-     
+
   } else {
     currentSlide++;
-    theChecker();
+    slidersChecker();
   }
-    
 }
 
 prevBtn.onclick = prevSlide;
 nextBtn.onclick = nextSlide;
 
-function theChecker(){
+function slidersChecker(){
 
-    slideNumber.textContent = 'Slide ' + (currentSlide) + ' of ' + (sliders.length);
+    sliders.forEach((slider) => {
+       slider.classList.remove('active');
+    });
 
-    removeAllActive();
- 
+    paginationDots.forEach((dot) => {
+        dot.classList.remove('active');
+    });
+
     sliders[currentSlide - 1].classList.add('active');
-
-    paginationIndicators.children[currentSlide -1].classList.add('active');
+    paginationDots[currentSlide - 1].classList.add('active');
 
     if(currentSlide == 1){
        prevBtn.classList.add('disabled');
     } else {
-        prevBtn.classList.remove('disabled');
+       prevBtn.classList.remove('disabled');
     }
 
     if(currentSlide == sliders.length){
@@ -82,13 +68,15 @@ function theChecker(){
        nextBtn.classList.remove('disabled');
     }
 
+    slideNumber.textContent = 'slide ' + (currentSlide) + ' of ' + (sliders.length);
+    
 }
 
-theChecker();
+slidersChecker();
 
-for (let i=0; i < paginationDots.length; i++) { // Get Slide By It's Dot
-     paginationDots[i].onclick = function () {
-        currentSlide = parseInt(this.getAttribute('data-index'));
-        theChecker();
-     }
+for(let i=0; i<paginationDots.length; i++){
+    paginationDots[i].onclick = function(){
+      currentSlide = parseInt(this.getAttribute('data-index'));
+      slidersChecker();
+    }
 }
